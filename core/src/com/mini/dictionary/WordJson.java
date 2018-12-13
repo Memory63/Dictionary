@@ -7,34 +7,54 @@ import com.badlogic.gdx.utils.Json;
 
 public class WordJson extends ApplicationAdapter {
 
-        @Override
-        public void create() {
-
+        public String init(String str,int num, int count) {
             Json json = new Json();
-            json.setElementType(Character.class, "items", Item.class);  // 指定Character中的item数据类型
-            Character character = json.fromJson(Character.class, Gdx.files.internal("character.json"));    // 从Json文件中创建一个Charactor对象
-            System.out.println(character);
+            json.setElementType(Character.class, "words", Item.class);
+            Character character = json.fromJson(Character.class, Gdx.files.internal("character.json"));
+            if (num == 1) // 鏌ユ壘鍗曡瘝
+                return character.toExplain(str);
+            else if (num == 2)
+                return character.toEnCn(count);
+            else // 鏌ユ壘闀垮害
+                return character.toLength();
         }
 
-        public static class Item {
+        public static class Item {  // 瀵硅薄瀹炰綋
             private String word;
-            private String cn;
+            private String explain;
 
             public String toWord() {
                 return word;
             }
+            public String toExplain() {return explain;}
         }
 
-        public static class Character {
-            public Array<Item> items = new Array<Item>();
+        public static class Character { // 杈撳嚭淇℃伅
+            public Array<Item> words = new Array<Item>();
 
-            public String toString() {
+            public String toExplain(String str) {
                 String string = new String();
-                for (Item item : items) {
-                    string += item.toString() + " ";
+                for (Item item : words) {
+                    if (str.equals(item.toWord()))
+                        string = item.toExplain() + "\n";
                 }
-
                 return string;
+            }
+
+            public String toLength() {
+                int count = 0;
+                for (Item item : words)
+                    count++;
+                return String.valueOf(count);
+            }
+
+            public String toEnCn(int count) {
+                for (Item item : words)
+                    if (count == 0)
+                        return item.toWord() + "\n\n" + item.toExplain();
+                    else
+                        count --;
+                    return "";
             }
         }
 }
