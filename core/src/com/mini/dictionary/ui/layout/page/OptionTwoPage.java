@@ -13,6 +13,8 @@ import com.mini.dictionary.WordJson;
 import com.mini.dictionary.ui.button.ButtonFramework;
 import com.mini.dictionary.ui.layout.page.dao.OptionPageDao;
 
+import java.io.IOException;
+
 public class OptionTwoPage implements OptionPageDao, Disposable {
     private Stage stage;
 
@@ -166,6 +168,12 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
         }
         else if (knowButton.isChecked()) {
             count++; knowButton.setChecked(false);
+            try {
+                word = wordJson.init("",2, count);
+                Runtime.getRuntime().exec("java -jar speech.jar " + word);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         else if (notKnowButton.isChecked()) {
             count++; notKnowButton.setChecked(false);
@@ -174,9 +182,11 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
             playSound.setChecked(false);
             try{
                 // 这里word返回的是解释，所以查找音频文件有有问题
+//                wordSound = Gdx.audio.newSound(Gdx.files.internal("sound/" + word.toLowerCase() + ".mp3"));
                 Runtime.getRuntime().exec("java -jar speech.jar " + word);
             }catch (Exception e) {
             }
+//            wordSound.play();
         }
 
         count = count < 0 ? 0 : count;
