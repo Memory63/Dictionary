@@ -12,5 +12,6 @@ eclipse.project {
 dependencies{
     compile group:'org.mybatis', name:'mybatis',version:'3.4.6';
     compile group:'mysql',name:'mysql-connector-java',version:'8.0.13';
+    compile fileTree(dir:'libs',include:['*.jar'])
 }
 

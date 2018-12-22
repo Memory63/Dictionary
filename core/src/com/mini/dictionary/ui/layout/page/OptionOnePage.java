@@ -105,7 +105,7 @@ public class OptionOnePage implements OptionPageDao, Disposable {
     }
     /** 每日一句信息*/
     public void dailySentenceMessage() {
-        dailySentenceLabel = new Label(wordJson.init(date.getDay() + "&Zzzxb&SDH",1,0),new Label.LabelStyle(font,null));
+        dailySentenceLabel = new Label(wordJson.init((date.getDay()+1) + "&Zzzxb&SDH",1,0),new Label.LabelStyle(font,null));
         dailySentenceLabel.setPosition(220,120);
     }
 

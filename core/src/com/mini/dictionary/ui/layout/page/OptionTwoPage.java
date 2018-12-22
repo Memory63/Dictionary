@@ -1,6 +1,5 @@
 package com.mini.dictionary.ui.layout.page;
 
-import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
@@ -175,11 +174,9 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
             playSound.setChecked(false);
             try{
                 // 这里word返回的是解释，所以查找音频文件有有问题
-                wordSound = Gdx.audio.newSound(Gdx.files.internal("sound/"+word.toLowerCase() +".mp3"));
+                Runtime.getRuntime().exec("java -jar speech.jar " + word);
             }catch (Exception e) {
-                wordSound = Gdx.audio.newSound(Gdx.files.internal("sound/noSound.mp3"));
             }
-            wordSound.play();
         }
 
         count = count < 0 ? 0 : count;
