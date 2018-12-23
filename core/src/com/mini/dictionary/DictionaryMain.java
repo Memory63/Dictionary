@@ -3,18 +3,20 @@ package com.mini.dictionary;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mini.dictionary.ui.layout.DictionaryLayout;
 import com.mini.dictionary.ui.DictionaryRender;
 
 public class DictionaryMain extends ApplicationAdapter {
 	private DictionaryLayout dictionaryLayout;
 	private DictionaryRender dictionaryRender;
-
+	private SpriteBatch batch;
 	@Override
 	/** 用于初始化*/
 	public void create () {
+		batch = new SpriteBatch();
 		dictionaryLayout = new DictionaryLayout();
-		dictionaryRender = new DictionaryRender(dictionaryLayout);
+		dictionaryRender = new DictionaryRender(dictionaryLayout,batch);
 	}
 
 	@Override

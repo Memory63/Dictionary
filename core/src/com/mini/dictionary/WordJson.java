@@ -5,6 +5,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
+import java.util.List;
+
 public class WordJson extends ApplicationAdapter {
 
         public String init(String str,int num, int count) {
@@ -48,11 +50,17 @@ public class WordJson extends ApplicationAdapter {
                 return String.valueOf(count);
             }
 
+            String sign[] = {"n.","v.","vt.","vi.","adj.","adv.","int.","abbr."};
             public String toEnCn(int count) {
+                String explain = "";
                 for (Item item : words)
-                    if (count == 0)
-                        return item.toWord() + "\n\n" + item.toExplain();
-                    else
+                    if (count == 0) {
+                        explain = item.toExplain();
+                        for (int i = 0; i < sign.length; i++) {
+                            explain = explain.replace(sign[i], "\n" + sign[i]);
+                        }
+                        return item.toWord().replace("&", " ") + explain;
+                    }else
                         count --;
                     return "";
             }

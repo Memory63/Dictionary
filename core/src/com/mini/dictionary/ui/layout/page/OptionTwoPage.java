@@ -36,6 +36,7 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
     private ImageTextButton playSound;
 
     private Sound wordSound;
+    private String word;
 
     private Label wordLabel;
     private int count = 0;
@@ -57,7 +58,7 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
                 Gdx.files.internal("font/myfont.png"),false);
 
         wordCardTexture = new Texture(Gdx.files.internal("icon/wordcard.png"));
-        wordLabel = new Label("", new Label.LabelStyle(font28, null));
+        wordLabel = new Label("", new Label.LabelStyle(font18, null));
         wordCardImage = new Image(wordCardTexture);
 
         createWordCardBoxAndWordLabel();
@@ -136,9 +137,8 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
         ButtonFramework buttonFramework = new ButtonFramework();
         buttonFramework.buttonMessage.setTexturePath("icon/daily-pronounce.png",
                 "icon/daily-pronounce-hover.png",null);
-        buttonFramework.buttonMessage.setFont(font18);
-        buttonFramework.buttonMessage.setAxis(600,415);
         playSound = buttonFramework.createButton();
+        playSound.setPosition(600, 445);
     }
 
     /** Actor添加到舞台*/
@@ -159,7 +159,8 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
     /** 有事件触发才被调用*/
     @Override
     public void showMessage() {
-        String word = wordJson.init("",2, count);
+        word = wordJson.init("",2, count);
+        wordLabel.setPosition(300,400); // 单词卡单词显示位置
         if (backButton.isChecked()) { // 向前翻页
             count--; backButton.setChecked(false);
         }

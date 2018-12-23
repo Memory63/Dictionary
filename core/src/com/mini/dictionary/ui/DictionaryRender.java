@@ -14,13 +14,13 @@ public class DictionaryRender implements Disposable {
     private Texture menuTexture;
     private Texture hintTexture;
 
-    public DictionaryRender(DictionaryLayout dictionaryLayout) {
+    public DictionaryRender(DictionaryLayout dictionaryLayout,SpriteBatch batch) {
         this.dictionaryLayout = dictionaryLayout;
+        this.batch = batch;
         init();
     }
 
     public void init() {
-        batch = new SpriteBatch();
         menuTexture = new Texture(Gdx.files.internal("icon/menu_background.png"));
         hintTexture = new Texture(Gdx.files.internal("icon/hint.png"));
     }
