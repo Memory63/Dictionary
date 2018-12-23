@@ -21,7 +21,8 @@ public class OptionSettingPage implements OptionPageDao {
     public void init() {
         font = new BitmapFont(Gdx.files.internal("font/font18.fnt"),
                 Gdx.files.internal("font/font18.png"),false);
-        label = new Label("每天背单词数",new Label.LabelStyle(font,null));
+        label = new Label("Version : 1.0\n作者: Zzzxb & Sssdh\n这个软件只是测试版,好多功能不完善还有很多bug没改" +
+                "\n有时间再改吧",new Label.LabelStyle(font,null));
         label.setPosition(200,500);
     }
 
