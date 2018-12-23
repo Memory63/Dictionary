@@ -33,14 +33,19 @@ public class WordJson extends ApplicationAdapter {
 
         public static class Character { // 输出信息
             public Array<Item> words = new Array<Item>();
+            String explain = "";
+            String sign[] = {"n.","v.","vt.","vi.","adj.","adv.","int.","abbr."};
 
             public String toExplain(String str) {
-                String string = new String();
                 for (Item item : words) {
-                    if (str.equals(item.toWord()))
-                        string = item.toExplain() + "\n";
+                    if (str.equals(item.toWord().substring(0,item.toWord().indexOf("&")))) {
+                        explain = item.toExplain();
+                        for (int i = 0; i < sign.length; i++) {
+                            explain = explain.replace(sign[i], "\n" + sign[i]);
+                        }
+                    }
                 }
-                return string;
+                return explain;
             }
 
             public String toLength() {
@@ -50,9 +55,7 @@ public class WordJson extends ApplicationAdapter {
                 return String.valueOf(count);
             }
 
-            String sign[] = {"n.","v.","vt.","vi.","adj.","adv.","int.","abbr."};
             public String toEnCn(int count) {
-                String explain = "";
                 for (Item item : words)
                     if (count == 0) {
                         explain = item.toExplain();
