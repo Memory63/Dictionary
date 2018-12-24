@@ -35,6 +35,6 @@ mybatis在我电脑上用不成,我也打不开项目，等需要的时候我提
 知识或应对方法了再好好写东西，不然东拼西凑的，跟豆腐渣工程一样。一戳就塌方了。
 专科学了两年也没明白过来学的是啥就知道java写个网页之类的,所以现在又回来重新再自学一遍吧， 
 把没学会没弄懂的再学学，学会的再沉淀一下吧,剩下来就专心升本了。 -- Zzzxb
-![1](https://github.com/ssssdh/Dictionary/blob/master/core/assets/a.png)
-![2](https://github.com/ssssdh/Dictionary/blob/master/core/assets/b.png)
-![3](https://github.com/ssssdh/Dictionary/blob/master/core/assets/c.png)
+![1](https://github.com/zzzxb/Dictionary/blob/master/core/assets/a.png)
+![2](https://github.com/zzzxb/Dictionary/blob/master/core/assets/b.png)
+![3](https://github.com/zzzxb/Dictionary/blob/master/core/assets/c.png)
