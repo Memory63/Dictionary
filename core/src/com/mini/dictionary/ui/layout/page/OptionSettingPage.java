@@ -7,13 +7,15 @@ import com.mini.dictionary.ui.button.ButtonFramework;
 import com.mini.dictionary.ui.layout.page.dao.OptionPageDao;
 import com.mini.dictionary.util.LoadFile;
 
+import static com.mini.dictionary.util.MenuInformation.BUTTONTWOPATH;
+
 public class OptionSettingPage implements OptionPageDao {
     private Stage stage;
 
     private Label label;
     private Label label2;
     private ImageTextButton bookButton;
-    private String[] book= {"背单词","123","456"};
+    private String[] book= {"单词本","四  级","升  本"};
     private int count = 0;
 
     public OptionSettingPage(Stage stage) {
@@ -34,8 +36,8 @@ public class OptionSettingPage implements OptionPageDao {
     public void backButton() {
         ButtonFramework buttonFramework= new ButtonFramework();
         buttonFramework.buttonMessage.setText(book[count]);
-        buttonFramework.buttonMessage.setTexturePath("icon/show.png","icon/show.png",null);
-        buttonFramework.buttonMessage.setFont(LoadFile.getFont28());
+        buttonFramework.buttonMessage.setTexturePath (BUTTONTWOPATH[0],BUTTONTWOPATH[1],null);
+        buttonFramework.buttonMessage.setFontFilePath("font/font18.fnt", "font/font18.png");
         buttonFramework.buttonMessage.setAxis(600, 450);
         bookButton = buttonFramework.createButton();
         stage.addActor(bookButton);
