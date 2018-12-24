@@ -1,16 +1,20 @@
 package com.mini.dictionary.ui.layout.page;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageTextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.mini.dictionary.ui.button.ButtonFramework;
 import com.mini.dictionary.ui.layout.page.dao.OptionPageDao;
+import com.mini.dictionary.util.LoadFile;
 
 public class OptionSettingPage implements OptionPageDao {
     private Stage stage;
 
-    private BitmapFont font;
     private Label label;
+    private Label label2;
+    private ImageTextButton bookButton;
+    private String[] book= {"背单词","123","456"};
+    private int count = 0;
 
     public OptionSettingPage(Stage stage) {
         this.stage = stage;
@@ -19,19 +23,49 @@ public class OptionSettingPage implements OptionPageDao {
 
     @Override
     public void init() {
-        font = new BitmapFont(Gdx.files.internal("font/font18.fnt"),
-                Gdx.files.internal("font/font18.png"),false);
-        label = new Label("Version : 1.0\n作者: Zzzxb & Sssdh\n这个软件只是测试版,好多功能不完善还有很多bug没改" +
-                "\n有时间再改吧",new Label.LabelStyle(font,null));
+        label = new Label("每日背单词数",new Label.LabelStyle(LoadFile.getFont18(),null));
+        label2 = new Label("单词本",new Label.LabelStyle(LoadFile.getFont18(),null));
         label.setPosition(200,500);
+        label2.setPosition(200,450);
+        backButton();
+    }
+
+    // 翻页
+    public void backButton() {
+        ButtonFramework buttonFramework= new ButtonFramework();
+        buttonFramework.buttonMessage.setText(book[count]);
+        buttonFramework.buttonMessage.setTexturePath("icon/show.png","icon/show.png",null);
+        buttonFramework.buttonMessage.setFont(LoadFile.getFont28());
+        buttonFramework.buttonMessage.setAxis(600, 450);
+        bookButton = buttonFramework.createButton();
+        stage.addActor(bookButton);
     }
 
     @Override
     public void addToStage() {
         stage.addActor(label);
+        stage.addActor(label2);
+        stage.addActor(bookButton);
+        stage.addActor(LoadFile.getNumBox());
     }
 
     @Override
     public void showMessage() {
+        int n = 0;
+        try{
+            if (LoadFile.getNumBox().getText().replace(" ","").equals("")){
+                LoadFile.getNumBox().setText("");
+            }else if ((n = Integer.parseInt(LoadFile.getNumBox().getText())) * 1 > 0) {
+                LoadFile.setCount(n);
+                LoadFile.getNumBox().setText(LoadFile.getCount() + "");
+            }
+        }catch (Exception e) {
+            LoadFile.getNumBox().setText(LoadFile.getCount() + "");
+        }
+        if (bookButton.isChecked()) {
+            bookButton.setChecked(false);
+            count = ++count > (book.length - 1) ? 0 :count++;
+            bookButton.setText(book[count]);
+        }
     }
 }

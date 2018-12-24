@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mini.dictionary.ui.layout.DictionaryLayout;
 import com.mini.dictionary.ui.DictionaryRender;
+import com.mini.dictionary.util.LoadFile;
 
 public class DictionaryMain extends ApplicationAdapter {
 	private DictionaryLayout dictionaryLayout;
@@ -17,6 +18,7 @@ public class DictionaryMain extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		dictionaryLayout = new DictionaryLayout();
 		dictionaryRender = new DictionaryRender(dictionaryLayout,batch);
+		new LoadFile();
 	}
 
 	@Override
