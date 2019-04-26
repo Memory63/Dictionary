@@ -4,8 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Disposable;
@@ -17,47 +16,39 @@ import com.badlogic.gdx.utils.Disposable;
  */
 public class LoadFile implements Disposable {
     private static BitmapFont font18;
-    private static BitmapFont font28;
     private static BitmapFont dateFont;
-    private static Texture dailySentenceTexture;
-    private static Texture searchBoxTexture;
-    private static Texture wordCardTexture;
-    private static Texture progress;
-    private static Texture progress1;
-    private static Texture progress2;
-    private static Texture menuTexture;
-    private static Texture hintTexture;
+    private static TextureAtlas.AtlasRegion progress;
+    private static TextureAtlas.AtlasRegion progress1;
+    private static TextureAtlas.AtlasRegion progress2;
     private static TextField searchBox;
     private static TextField numBox;
     private static int count; // 每日背单词数
+    public static final TextureAtlas atlas;
 
     static{
+        atlas = new TextureAtlas(Gdx.files.internal("icon/icons.atlas"));
         font18 = new BitmapFont(Gdx.files.internal("font/font18.fnt"),
                 Gdx.files.internal("font/font18.png"),false);
-        font28 = new BitmapFont(Gdx.files.internal("font/myfont.fnt"),
-                Gdx.files.internal("font/myfont.png"),false);
         dateFont = new BitmapFont(Gdx.files.internal("font/dateFont.fnt")
                 ,Gdx.files.internal("font/dateFont.png"),false);
-        dailySentenceTexture = new Texture(Gdx.files.internal("icon/boundary.png"));
-        searchBoxTexture = new Texture(Gdx.files.internal("icon/search.png"));
-        wordCardTexture = new Texture(Gdx.files.internal("icon/wordcard.png"));
-        progress = new Texture(Gdx.files.internal("icon/progress.png"));
-        progress1 = new Texture(Gdx.files.internal("icon/progress1.png"));
-        progress2 = new Texture(Gdx.files.internal("icon/progress2.png"));
-        menuTexture = new Texture(Gdx.files.internal("icon/menu_background.png"));
-        hintTexture = new Texture(Gdx.files.internal("icon/hint.png"));
+        progress =  atlas.findRegion("progress");
+        progress1 = atlas.findRegion("progress1");
+        progress2 = atlas.findRegion("progress2");
         searchBox();
         setNumBox();
     }
-    public static BitmapFont getFont28() { return font28;}
     public static BitmapFont getFont18() {
         return font18;
     }
     public static BitmapFont getDateFont() {return dateFont;}
-    public static Texture getDailySentenceTexture() { return dailySentenceTexture; }
-    public static Texture getSearchBoxTexture() { return searchBoxTexture;}
-    public static Texture getWordCardTexture() {return wordCardTexture;}
-    public static Texture getProgress(int n) {
+    public static TextureAtlas.AtlasRegion getDailySentenceTexture() {
+        return atlas.findRegion("boundary"); }
+    public static TextureAtlas.AtlasRegion getSearchBoxTexture() {
+        return atlas.findRegion("search");}
+    public static TextureAtlas.AtlasRegion getWordCardTexture() {
+        return atlas.findRegion("wordcard");
+    }
+    public static TextureAtlas.AtlasRegion getProgress(int n) {
         if (n == 0)
             return progress;
         else if (n == 1)
@@ -66,8 +57,6 @@ public class LoadFile implements Disposable {
             return progress2;
         return progress;
     }
-    public static Texture getMenuTexture() {return menuTexture;}
-    public static Texture getHintTexture() {return hintTexture;}
     /** 光标*/
     private static Texture createCursorTexture() {
         Pixmap pixmap = new Pixmap(1, 16, Pixmap.Format.RGBA8888);
@@ -93,7 +82,7 @@ public class LoadFile implements Disposable {
 
     private static TextField.TextFieldStyle getTextFiledSytle() {
         TextField.TextFieldStyle style = new TextField.TextFieldStyle();
-        style.background = new TextureRegionDrawable(new TextureRegion(getSearchBoxTexture()));
+        style.background = new TextureRegionDrawable(getSearchBoxTexture());
         style.cursor = new TextureRegionDrawable(new TextureRegion(createCursorTexture()));
         style.font = getFont18();
         style.fontColor = new Color(1,1,1,1);
@@ -111,13 +100,5 @@ public class LoadFile implements Disposable {
 
     @Override
     public void dispose() {
-        dailySentenceTexture.dispose();
-        searchBoxTexture.dispose();
-        wordCardTexture.dispose();
-        progress.dispose();
-        progress1.dispose();
-        progress2.dispose();
-        menuTexture.dispose();
-        hintTexture.dispose();
     }
 }

@@ -50,7 +50,7 @@ public class OptionOnePage implements OptionPageDao, Disposable {
     /** 查询按钮*/
     public void queryButton() {
         query = new ButtonFramework();
-        query.buttonMessage.setTexturePath("icon/query.png","icon/query-hover.png",null);
+        query.buttonMessage.setTexturePath("query","query-hover",null);
         query.buttonMessage.setFont(LoadFile.getFont18());
         query.buttonMessage.setAxis(700,450);
         queryButton = query.createButton();

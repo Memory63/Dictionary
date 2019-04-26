@@ -15,10 +15,10 @@ public class DictionaryMain extends ApplicationAdapter {
 	@Override
 	/** 用于初始化*/
 	public void create () {
+		new LoadFile();
 		batch = new SpriteBatch();
 		dictionaryLayout = new DictionaryLayout();
 		dictionaryRender = new DictionaryRender(dictionaryLayout,batch);
-		new LoadFile();
 	}
 
 	@Override

@@ -5,8 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 
-import java.util.List;
-
 public class WordJson extends ApplicationAdapter {
 
         public String init(String str,int num, int count) {
@@ -15,8 +13,8 @@ public class WordJson extends ApplicationAdapter {
             Character character = json.fromJson(Character.class, Gdx.files.internal("character.json"));
             if (num == 1) // 查找单词
                 return character.toExplain(str);
-            else if (num == 2)
-                return character.toEnCn(count);
+            else if (num == 2 || num ==4)
+                return character.toEnCn(count, num);
             else // 查找长度
                 return character.toLength();
         }
@@ -55,17 +53,22 @@ public class WordJson extends ApplicationAdapter {
                 return String.valueOf(count);
             }
 
-            public String toEnCn(int count) {
+            public String toEnCn(int count, int num) {
                 for (Item item : words)
                     if (count == 0) {
                         explain = item.toExplain();
                         for (int i = 0; i < sign.length; i++) {
-                            explain = explain.replace(sign[i], "\n" + sign[i]);
+                            if (num == 4) {
+                                explain = explain.replace(sign[i], "\t" + sign[i]);
+                            }else {
+                                explain = explain.replace(sign[i], "\n" + sign[i]);
+                            }
                         }
                         return item.toWord().replace("&", " ") + explain;
                     }else
                         count --;
                     return "";
             }
+
         }
 }

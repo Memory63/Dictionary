@@ -20,8 +20,6 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
     private Image progressKnow;
     private Image progressNotKnow;
 
-    private ImageTextButton backButton;
-    private ImageTextButton forWardButton;
     private ImageTextButton knowButton;
     private ImageTextButton notKnowButton;
     private ImageTextButton playSound;
@@ -47,39 +45,17 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
         wordCardImage = new Image(LoadFile.getWordCardTexture());
 
         createWordCardBoxAndWordLabel();
-        createBackButton();
-        createForWardButton();
         createKnowButton();
         createNotKnowButton();
         createProgress();
         createSoundButton();
     }
 
-    /** 向前翻页按钮 */
-    public void createBackButton() {
-        ButtonFramework buttonFramework= new ButtonFramework();
-        buttonFramework.buttonMessage.setTexturePath("icon/back-disabled.png"
-                ,"icon/back-hover.png", null);
-        buttonFramework.buttonMessage.setFont(LoadFile.getFont18());
-        buttonFramework.buttonMessage.setAxis(200, 300);
-        backButton = buttonFramework.createButton();
-    }
-
-    /** 向后翻页按钮 */
-    public void createForWardButton() {
-        ButtonFramework buttonFramework= new ButtonFramework();
-        buttonFramework.buttonMessage.setTexturePath("icon/forward-disabled.png",
-                "icon/forward-hover.png",null);
-        buttonFramework.buttonMessage.setFont(LoadFile.getFont18());
-        buttonFramework.buttonMessage.setAxis(710,300);
-        forWardButton = buttonFramework.createButton();
-    }
-
     /** 知道按钮 */
     public void createKnowButton() {
         ButtonFramework buttonFramework= new ButtonFramework();
-        buttonFramework.buttonMessage.setTexturePath("icon/know-disabled.png",
-                "icon/know-hover.png",null);
+        buttonFramework.buttonMessage.setTexturePath("know-disabled",
+                "know-hover",null);
         buttonFramework.buttonMessage.setFont(LoadFile.getFont18());
         buttonFramework.buttonMessage.setAxis(580,100);
         knowButton = buttonFramework.createButton();
@@ -88,8 +64,8 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
     /** 不知道按钮*/
     public void createNotKnowButton() {
         ButtonFramework buttonFramework= new ButtonFramework();
-        buttonFramework.buttonMessage.setTexturePath("icon/notknow-disabled.png",
-                "icon/notknow-hover.png",null);
+        buttonFramework.buttonMessage.setTexturePath("notknow-disabled",
+                "notknow-hover",null);
         buttonFramework.buttonMessage.setFont(LoadFile.getFont18());
         buttonFramework.buttonMessage.setAxis(280,100);
         notKnowButton = buttonFramework.createButton();
@@ -117,8 +93,8 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
     /** 声音按钮*/
     public void createSoundButton() {
         ButtonFramework buttonFramework = new ButtonFramework();
-        buttonFramework.buttonMessage.setTexturePath("icon/daily-pronounce.png",
-                "icon/daily-pronounce-hover.png",null);
+        buttonFramework.buttonMessage.setTexturePath("daily-pronounce",
+                "daily-pronounce-hover",null);
         playSound = buttonFramework.createButton();
         playSound.setPosition(600, 445);
     }
@@ -128,8 +104,6 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
     public void addToStage() {
         stage.addActor(wordCardImage);
         stage.addActor(wordLabel);
-        stage.addActor(backButton);
-        stage.addActor(forWardButton);
         stage.addActor(knowButton);
         stage.addActor(notKnowButton);
         stage.addActor(progressNotKnow);
@@ -143,13 +117,7 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
     public void showMessage() {
         word = wordJson.init("",2, count);
         wordLabel.setPosition(300,400); // 单词卡单词显示位置
-        if (backButton.isChecked()) { // 向前翻页
-            count--; backButton.setChecked(false);
-        }
-        else if (forWardButton.isChecked()){ // 向后翻页
-            count++; forWardButton.setChecked(false);
-        }
-        else if (knowButton.isChecked()) {
+        if (knowButton.isChecked()) {
             count++; knowButton.setChecked(false);
             try {
                 word = wordJson.init("",2, count);
@@ -164,9 +132,7 @@ public class OptionTwoPage implements OptionPageDao, Disposable {
         else if (playSound.isChecked()) {
             playSound.setChecked(false);
             try{
-                // 调用本地文件声音文件发音
-//              wordSound = Gdx.audio.newSound(Gdx.files.internal("sound/" + word.toLowerCase() + ".mp3"));
-                // 调用百度语音合成接口发音
+                // 调用百度语音合成接口发音 这个需要重新调整，加入源码后打包才能依旧发音
                 Runtime.getRuntime().exec("java -jar speech.jar " + word);
             }catch (Exception e) {
             }

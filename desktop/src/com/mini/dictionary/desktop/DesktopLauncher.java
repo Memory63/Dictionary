@@ -6,7 +6,7 @@ import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.mini.dictionary.DictionaryMain;
 
 public class DesktopLauncher {
-	public static void main (String[] arg) {
+	public static void main (String[] arg){
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.title = "Dictionary"; // 窗口标题
 		config.addIcon("icon/appicon.png", Files.FileType.Internal);

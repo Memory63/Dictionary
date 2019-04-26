@@ -120,6 +120,8 @@ public class OptionMenu {
             optionOnePage.showMessage();
         if (itb.isChecked() && itb == buttonTwo)
             optionTwoPage.showMessage();
+        if (itb.isChecked() && itb == buttonThree)
+            optionThreePage.showMessage();
         if (itb.isChecked() && itb == settingButton)
             optionSettingPage.showMessage();
     }
